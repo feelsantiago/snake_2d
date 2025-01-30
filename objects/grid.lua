@@ -51,6 +51,15 @@ function Grid:available()
         break
       end
     end
+
+    if finding then
+      position = Vector.random(
+        self.position.x,
+        self.width,
+        self.position.y,
+        self.height
+      )
+    end
   end
 
   return position
