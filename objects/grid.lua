@@ -1,4 +1,3 @@
-local Vector = require("math.vector")
 local Object = require("objects.object")
 
 ---@class Grid : Object

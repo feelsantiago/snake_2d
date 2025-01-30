@@ -35,8 +35,7 @@ function Keyboard:action()
     self.last = ACTIONS.move_right
     return ACTIONS.move_right
   else
-    return ACTIONS.none
-    -- return self.last
+    return self.last
   end
 end
 
