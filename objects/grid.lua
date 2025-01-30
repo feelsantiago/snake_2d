@@ -37,7 +37,7 @@ function Grid:draw()
   )
 end
 
-function Grid:freeLocation()
+function Grid:available()
   local finding = true
   local position =
       Vector.random(self.position.x, self.width, self.position.y, self.height)
