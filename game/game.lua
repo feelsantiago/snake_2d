@@ -47,10 +47,10 @@ function Game:update(dt)
   end
 
   if self.snake:collision(self.fruit) then
-    local position = self.grid:available()
-
-    self.fruit:update(position)
     self.score:increment()
+
+    local position = self.grid:available()
+    self.fruit:update(position)
   end
 end
 
