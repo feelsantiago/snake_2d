@@ -1,12 +1,16 @@
 local Object = require("objects.object")
+local Vector = require("math.vector")
 
 ---@class Grid : Object
 ---
----@overload fun(position: Vector, width: integer, height: integer): Grid
+---@field objects Object[]
+---
+---@overload fun(position: Vector, width: integer, height: integer, objects: Object[]): Grid
 local Grid = Object:extend()
 
-function Grid:new(position, width, height)
+function Grid:new(position, width, height, objects)
   self.super.new(self, position, width, height)
+  self.objects = objects or {}
 end
 
 ---@param object Object
@@ -23,6 +27,7 @@ function Grid:outbound(object)
 end
 
 function Grid:draw()
+  love.graphics.setColor(255, 255, 255)
   love.graphics.rectangle(
     "line",
     self.position.x,
@@ -30,6 +35,25 @@ function Grid:draw()
     self.width,
     self.height
   )
+end
+
+function Grid:freeLocation()
+  local finding = true
+  local position =
+      Vector.random(self.position.x, self.width, self.position.y, self.height)
+
+  while finding do
+    for _, object in ipairs(self.objects) do
+      if not object:collide(position) then
+        finding = false
+      else
+        finding = true
+        break
+      end
+    end
+  end
+
+  return position
 end
 
 return Grid

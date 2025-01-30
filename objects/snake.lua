@@ -4,6 +4,7 @@ local ACTIONS = require("inputs.actions")
 
 ---@class Snake : Object
 ---
+---@field super Object
 ---@field speed integer
 ---@field size integer
 ---@field body Object[]
@@ -44,6 +45,12 @@ end
 ---@param vector Vector
 function Snake:reset(vector)
   self.position = vector
+end
+
+---@param other Object
+function Snake:collision(other)
+  -- TODO: verify collision with body parts
+  return self.super.collision(self, other)
 end
 
 function Snake:draw()
