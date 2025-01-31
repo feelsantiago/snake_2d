@@ -37,6 +37,8 @@ function Grid:draw()
   )
 end
 
+-- maybe receive the object and update the location
+-- Grid:allocate(fruit)
 function Grid:available()
   local finding = true
   local position =
@@ -44,6 +46,7 @@ function Grid:available()
 
   while finding do
     for _, object in ipairs(self.objects) do
+      -- TODO: object must be inbound
       if not object:collide(position) then
         finding = false
       else

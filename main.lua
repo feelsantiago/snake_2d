@@ -10,19 +10,19 @@ local DIFFICULTY = require("config.difficulty")
 local game = nil
 
 function love.load()
-	local keyboard = Keyboard(ACTIONS.move_right)
-	game = Game(keyboard, DIFFICULTY.normal)
+  local keyboard = Keyboard(ACTIONS.move_right)
+  game = Game(keyboard, DIFFICULTY.normal)
 
-	game:load()
+  game:load()
 
-	love.graphics.setBackgroundColor(0, 0, 0)
+  love.graphics.setBackgroundColor(0, 0, 0)
 end
 
 ---@param dt integer
 function love.update(dt)
-	game:update(dt)
+  game:update(dt)
 end
 
 function love.draw()
-	game:draw()
+  game:draw()
 end

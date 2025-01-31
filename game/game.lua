@@ -21,7 +21,7 @@ function Game:new(keyboard, difficulty)
   self.keyboard = keyboard
   self.difficulty = difficulty or DIFFICULTY.easy
   self.snake = Snake(15, 100, 50, self.difficulty)
-  self.fruit = Fruit(350, 450, 50)
+  self.fruit = Fruit(300, 300, 50)
   self.score = Score(10, 25)
 end
 
@@ -48,6 +48,7 @@ function Game:update(dt)
 
   if self.snake:collision(self.fruit) then
     self.score:increment()
+    self.snake:eat(self.fruit)
 
     local position = self.grid:available()
     self.fruit:update(position)

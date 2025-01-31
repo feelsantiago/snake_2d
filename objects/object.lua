@@ -40,7 +40,7 @@ function Object:collide(point)
   return self:rigth() >= point.x
       and self:left() <= point.x
       and self:bottom() >= point.y
-      and self.top <= point.y
+      and self:top() <= point.y
 end
 
 return Object

@@ -22,6 +22,17 @@ end
 ---@param action actions
 ---@param dt integer
 function Snake:move(action, dt)
+  for i = #self.body, 1, -1 do
+    local current = self.body[i]
+
+    if i ~= 1 then
+      local next = self.body[i - 1]
+      current.position = next.position
+    else
+      current.position = self.position
+    end
+  end
+
   local speed = self.size + self.speed
   if action == ACTIONS.move_up then
     local y = self.position.y - speed * dt
@@ -42,6 +53,15 @@ function Snake:head()
   return Snake(self.position.x, self.position.y, self.size, self.speed)
 end
 
+function Snake:tail()
+  local tail = #self.body
+  if tail == 0 then
+    return self:head()
+  end
+
+  return self.body[tail]
+end
+
 ---@param vector Vector
 function Snake:reset(vector)
   self.position = vector
@@ -53,6 +73,13 @@ function Snake:collision(other)
   return self.super.collision(self, other)
 end
 
+---@param object Object
+function Snake:eat(object)
+  local head = self:head()
+  self.position = object.position
+  table.insert(self.body, 1, head)
+end
+
 function Snake:draw()
   love.graphics.setColor(255, 255, 255)
   love.graphics.rectangle(
@@ -62,6 +89,17 @@ function Snake:draw()
     self.width,
     self.height
   )
+
+  for _, body in ipairs(self.body) do
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.rectangle(
+      "fill",
+      body.position.x,
+      body.position.y,
+      body.width,
+      body.height
+    )
+  end
 end
 
 return Snake
